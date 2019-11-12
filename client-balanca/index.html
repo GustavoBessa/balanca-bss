@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery.min.js"></script>
+    <title>Balança Espacial Bemol</title>
+</head>
+<body onload="req()">
+    <input id="valor_peso" type="text" autofocus>  
+    <!-- Video de background -->
+    <video autoplay muted loop id="myVideo">
+        <source src="video/3D Universe Space.mp4" type="video/mp4">
+    </video>
+    <!-- Cabine foguete-->
+    <input value="0" id="controle">
+    <div id="cabine">
+        <img src="background/cabine_foguete.png" class="imagem_cabine">
+        <!-- Letreiro Inicial -->
+        <svg viewBox="0 0 1400 600" class="letreiro_svg">
+            <symbol id="s-text">
+                <text font-size="80" text-anchor="middle" x="50%" y="50%" dy=".35em">QUAL SERIA SEU PESO</text>
+                <text font-size="80" text-anchor="middle" x="50%" y="65%" dy=".35em">EM OUTRO PLANETA?</text>
+            </symbol>
+            <use class="text" xlink:href="#s-text"></use>
+            <use class="text" xlink:href="#s-text"></use>
+            <use class="text" xlink:href="#s-text"></use>
+            <use class="text" xlink:href="#s-text"></use>
+            <use class="text" xlink:href="#s-text"></use>
+        </svg>
+    </div>
+    <div class="container" id="resultados">
+        <!-- Logo Bemol Farma e Bemol -->
+        <div class="mt-5 logos_bemol">
+            <img class="float-left" src="logo bemol/bemol-farma-logo.png" style="width: 12%;"> 
+            <img class="float-right" src="logo bemol/Bemol.logo.png" style="width: 10%;">
+        </div>
+        <!-- Planeta Terra, Lua e Marte-->
+        <div class="row ml-4">
+
+            <!-- Lua -->
+            <div class="col">
+                <div class="btn lua mt-5" id="caixa_span_lua">
+                    <img src="planetas/Lua.png" class="mt-5"  >
+                    <div>
+                        <h1 class="text-white">Lua</h1>
+                        <h1 class="btn btn-light lcd">
+                            <span id="span_lua" name="span_lua"></span>
+                            <span class="kg" >Kg</span>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <!---->
+
+            <!-- Terra -->
+            <div class="col">
+                <div class="btn" style="width: 400px; height: 400px">
+                    <img src="planetas/Terra_light.png" style="width: 250px" >
+                    <div>
+                        <h1 class="text-white">Terra</h1>
+                        <h1 class="btn btn-light lcd_terra">
+                            <span id="input_terra"></span>
+                            <span class="kg" >Kg</span> 
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <!---->
+
+            <!-- Marte -->
+            <div class="col">
+                <div class="btn marte mt-5">
+                    <img src="planetas/Marte.png" class="mt-5" >
+                    <div>
+                        <h1 class="text-white">Marte</h1>
+                        <h1 class="btn btn-light lcd" >
+                            <span id="span_marte" ></span>
+                            <span class="kg">Kg</span> 
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <!---->
+        </div>
+        <!---->
+
+        <!-- Planetas -->
+        <div class="row mt-5">
+            <!--Mercurio-->
+            <div class="col-2">
+                <div class="btn">
+                    <img src="planetas/Mercurio.png"  style="width: 75px" class="mt-3" >
+                    <div>
+                        <h4 class="text-white">Mercúrio</h4>
+                        <h5 class="btn btn-light lcd">
+                            <span id="span_mercurio" ></span>
+                            <span class="kg" >Kg</span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <!---->
+
+            <!--Venus-->
+            <div class="col-2">
+                <div class="btn">
+                    <img src="planetas/Venus.png" style="width: 75px" class="mt-3" >
+                    <div>
+                        <h4 class="text-white">Vênus</h4>
+                        <h5 class="btn btn-light lcd">
+                            <span id="span_venus"></span>
+                            <span class="kg" >Kg</span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <!---->
+
+            <!--Jupiter-->
+            <div class="col-2">
+                <div class="btn">
+                    <img src="planetas/Jupiter.png"  style="width: 75px" class="mt-3" >
+                    <div>
+                        <h4 class="text-white">Júpiter</h4>
+                        <h5 class="btn btn-light lcd" >
+                            <span id="span_jupiter" > </span> 
+                            <span class="kg" >Kg</span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <!---->
+
+            <!--Saturno-->
+            <div class="col-2">
+                <div class="btn">
+                    <img src="planetas/Saturno.png"  style="max-height: 75px" class="mt-3 " >
+                    <div>
+                        <h4 class="text-white">Saturno</h4>
+                        <h5 class="btn btn-light lcd">
+                            <span id="span_saturno" ></span>
+                            <span class="kg" >Kg</span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <!---->
+
+            <!--Urano-->
+            <div class="col-2">
+                <div class="btn">
+                    <img src="planetas/Urano.png"  style="width: 75px" class="mt-3" >
+                    <div>
+                        <h4 class="text-white">Urano</h4>
+                        <h5 class="btn btn-light lcd">
+                            <span id="span_urano" ></span>
+                            <span class="kg" >Kg</span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <!---->
+
+            <!--Netuno-->
+            <div class="col-2">
+                <div class="btn">
+                    <img src="planetas/Netuno.png"  style="width: 75px" class="mt-3" >
+                    <div>
+                        <h4 class="text-white">Netuno</h4>
+                        <h5 class="btn btn-light lcd">
+                            <span id="span_netuno" ></span> 
+                            <span class="kg" >Kg</span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <!---->
+
+        </div>
+        <!---->
+    </div> 
+
+    <!-- partial -->
+    <script src='js/aos.js'></script>
+    <script  src="js/script.js"></script>
+    
+
+</body>
+</html>
