@@ -32,41 +32,30 @@ app = Flask(__name__)
 def index():
 	ser = serial.Serial('/dev/ttyUSB0', 4800)
 	print('Lendo a balanca')
-	a = 0
-	pesoTotal = ''
-	valido = ''
-	while a < 2:
+	result = '0'
+	b=0
+	a=0
+	while a<320:
 		ser.write(b'\x05')
-		peso1 = ser.read(02)
-		peso2 = ser.read(03)
-		peso1 = strip_control_characters(peso1)
-		peso2 = strip_control_characters(peso2)
-		pesoParcial = peso1+peso2
-		pesoTotal+=pesoParcial
-		if(a>0 and pesoTotal[:5] != 'IIIII' and pesoTotal[:5].isdigit()):
-			valido = pesoTotal[:5]
-			return pesoTotal[:5]
-		elif(pesoTotal[:5] == 'IIIII'):
-			return 'calc'
-		a += 1
-	# 	if len(line3) == 5:
-	# 		if result != line3 and line3.isdigit() and line3 != '00000':
-	# 			result = line3
-	# 			return result
-	# 			print(result)
-	# 			valido = True
-	# 		elif line3 == '00000':
-	# 			print('zero')
-	# 			b+=1
-	# 		else:
-	# 			print('calculando -> {}'.format(a))
-	# 			c+=1
+		line = ser.read(02)
+		line2 = ser.read(03)
+		line = strip_control_characters(line)
+		line2 = strip_control_characters(line2)
+		line3 = line+line2
 		
-		time.sleep(0.010)
-	# print(b)
-	# if b == 8:
-	# 	result='0'
-	# elif c >= 2 and valido == False:
-	# 	result='calc'
+		if len(line3) == 5:
+			if result != line3 and line3.isdigit() and line3 != '00000':
+				result = line3
+				print(result)
+			elif line3 == '00000':
+				print('zero')
+				b+=1
+			else:
+				print('calculando -> {}'.format(a))
+		a += 1
+		time.sleep(0.001)
+	if b == 46:
+		result='0'
+	return result
 if __name__ == '__main__':
  	app.run()
